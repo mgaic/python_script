@@ -1,1 +1,3 @@
 1.注册登录讯代理，充值，python实现相关接口，使用动态转发获取动态ip，并测试ip可用性
+2.再读廖雪峰Git教程将本地仓库与远程仓库关联,将此项目推到GitHub上
+3.Git相关用法 merge checkout branch 
