@@ -1,0 +1,46 @@
+1.使用自动化测试工具appnium对app进行操作，包括adb连接手机，adb连接安卓模拟器
+
+2.adb连接手机遇到的坑
+	1.华为手机打开进入开发者选项，打开调试模式，使用adb devices发现仍无法发现连接到设备
+	另一种方式是通过wifi连接，但是前提是要先通过USB调试先连接到手机，所以还是要通过USB调试
+	连接到手机。最后下载了华为手机助手，才得以连接上手机
+	2.appnium开启session，4-5处错误，哭晕...
+
+3.华为手机并未获得root权限，所以 /data/app 路径下的内容无法查看
+  不过可以通过其他命令查看手机下的应用
+
+4.通过 logcat | grep cmp=  这条命令结合录制来获取运行的app的包名以及活动
+
+5.adb连接到模拟器 
+	adb connect 127.0.0.1:62001 (模拟器地址加端口)
+
+6.进入交互模式
+	adb -s "设备" shell 
+
+7.查看包名 
+	前提是具有root权限，无root权限可以通过其他方式查看包名 
+	cd /data/app 
+	ls
+8.win7 专业版无秘钥 cmd命令行无法复制长串内容，
+  git bash 中无法直接运行exe文件，由于小窗口下将文件拖入bash中，文件路径与已经输入的命令
+  构成的串如果过长会打乱显示，故 cmd窗口与bash各有优缺点
+  但是git bash可以通过全屏bash窗口,以及start exe文件来对上述不便进行弥补  
+
+9.还未搞定，appnium无法连接到相应包,提示超时
+
+
+
+
+
+
+
+
+
+
+{
+  "platformName": "Android",
+  "platformVersion": "5.1.1",
+  "deviceName": "127.0.0.1:62001",
+  "appPackage": "com.ninetyone.pron.android",
+  "com.ninetyone.pron.android.ui.LaunchActivity"
+}
