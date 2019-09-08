@@ -28,6 +28,17 @@
 
 9.还未搞定，appnium无法连接到相应包,提示超时
 
+10.adb安装应用包
+  adb -s device_name install package_name
+
+11.夜神模拟器使用心得
+	建议开启VT模式 bios中设置
+	速度快了不止一个数量级
+	体验翻倍
+
+12.获取包名以及活动名称
+	aapt.exe dump badging package_path
+	对路径下的包进行反编译，获取包名以及活动名称
 
 
 

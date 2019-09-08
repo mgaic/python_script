@@ -1,0 +1,17 @@
+1.蚂蚁VPN 版本无限流量
+
+2.卸载夜神模拟器，安装逍遥模拟器，卸载逍遥模拟器，安装夜神模拟器
+
+3.对appium理解又深一步，appium启动服务，而捕捉activity以及控件不一定要通过appium中的
+	session，可通过android_sdk工具中的automatorviewer,github上有开源的加强版的
+	automator viewer 在android工具包的基础上，添加xpath定位，可以通过xpath的定位到相应控件，整个操作类似
+	selenium，定位元素加操作
+
+4.夜神模拟器打开VT，在模拟器里面的操作流畅多了，没有了卡顿的感觉,实在好评.
+
+5.复习: 捕捉包名以及活动
+  	aapt.exe dump badging package_path
+  	aapt反编译命令 在andriod_sdk工具包中
+
+6.uiautomator viewer加强版比appium session好用，功能更多，可通过xpath定位。
+	appium中的xpath兼容并没有那么好
