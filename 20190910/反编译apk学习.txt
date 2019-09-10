@@ -1,0 +1,11 @@
+参考文章：https://www.cnblogs.com/xpwi/p/9892680.html
+
+1.使用apktool对apk进行反编译，得到图片，语言资源，xml等文件
+	java -jar apktool_2.3.4.jar d -f apk文件绝对路径 -o 输出的目录
+
+2.使用dex2jar反编译apk得到jar文件
+	d2j-dex2jar classes.dex
+
+3.使用jd-gui工具将jar文件转化为java代码
+	注意事项，双击启动jd-gui会提示jdk版本不符，应用命令
+	java -jar jd-gui 来启动该工具

@@ -1,0 +1,44 @@
+以下命令均在夜神模拟器安卓5.1.1中测试：
+1.获取手机机型  
+	$ adb shell getprop ro.product.model  #HUAWEI MLA-AL10
+
+2.获取手机序列号(串号)   #b8110e9f4771acd2
+	$ adb shell getprop ro.serialno
+
+2.5.获取手机IMEI 
+	$ adb shell service call iphonesubinfo 1
+
+3.获取机器MAC地址： #08:00:27:6d:7f:89
+
+ 	$ adb shell  cat /sys/class/net/wlan0/address
+
+4.获取CPU序列号： 
+
+	$ adb shell cat /proc/cpuinfo
+
+5.手机版本  #5.1l1
+	$ adb shell getprop ro.build.version.release 
+
+6.查看产品系统信息
+	$ adb shell cat /system/build.prop | grep product
+
+7.某视频app首次在手机上登录时先读取手机里的缓存信息，首先从缓存信息中获得设备标识
+	如果启动app前清除了应用数据，就会重新获取一次系统信息
+	其中单修改IMEI无效，仍然认定为之前的终端
+	其中单修改IMSI无效，认定为新终端
+	其中单修改ICCID无效，认定为新终端
+	其中单修改MAC无效，认定为新终端
+	其中单修改序列号有效，认定为新终端
+	其中单修改Andriod_ID有效，认定为新终端
+
+8.获取设备Android_ID的方法 #1acd1b8110e9f477
+  	$adb shell settings get secure android_id
+
+9.修改设备Android_ID的方法 #修改为1acd1b8110e9f478
+	$adb shell settings put secure android_id 1acd1b8110e9f478
+
+10.再次查询Android_ID #发现android_I被更改了
+	$adb shell settings get secure android_id
+
+11.告一段落...
+
