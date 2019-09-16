@@ -10,13 +10,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from jiema import Chaojiying_Client
 
-EMAIL = 'cqc@cuiqingcai.com'
-PASSWORD = 'qwer66668888'
-BORDER = 6
-INIT_LEFT = 60
-CHAOJIYING_USERNAME = '15872998154' #超级鹰账号
-CHAOJIYING_PASSWORD = 'qwer66668888' #超级鹰密码
-CHAOJIYING_PASSWORD_SOFTWARE_ID = '901519' #超级鹰软件ID，需至平台申请
+EMAIL = ''
+PASSWORD = ''
+CHAOJIYING_USERNAME = '' #超级鹰账号
+CHAOJIYING_PASSWORD = '' #超级鹰密码
+CHAOJIYING_PASSWORD_SOFTWARE_ID = '' #超级鹰软件ID，需至平台申请
 CODETYPE = 9004
 
 class CrackGeetest():
@@ -147,24 +145,16 @@ class CrackGeetest():
             time.sleep(random.uniform(1, 1.5))  
         self.submit_captcha()
         
-
         if self.captcha_is_passed():
             print("验证通过")
             self.login()
         else:
             Chaojiying_Client(CHAOJIYING_USERNAME, CHAOJIYING_PASSWORD, CHAOJIYING_PASSWORD_SOFTWARE_ID).ReportError(self.pic_id)
-            # print("验证未通过,请重试")
             time.sleep(random.uniform(3, 4))
             self.input_captcha_again()
-
-
-        
-
-        # time.sleep(1000)
     
     def input_captcha_again(self):
         image_info = self.get_geetest_image_and_position('captcha1.png')
-        # time.sleep(1000)
         image1 = image_info[0]
         position = image_info[1]
         click_cor = self.submit_captcha_img_get_click_cor()
@@ -173,11 +163,9 @@ class CrackGeetest():
             time.sleep(random.uniform(1, 1.5))  
         self.submit_captcha()
         if self.captcha_is_passed():
-            # print("验证通过")
             self.login()
         else:
             Chaojiying_Client(CHAOJIYING_USERNAME, CHAOJIYING_PASSWORD, CHAOJIYING_PASSWORD_SOFTWARE_ID).ReportError(self.pic_id)
-            # print("验证未通过,请重试")
             self.input_captcha_again()
 
         
@@ -186,9 +174,7 @@ class CrackGeetest():
         print("提交验证码")
         # ActionChains(self.browser).move_by_offset(position[3]-20, position[1]-20).click().perform()
         submit_captcha_btn = self.wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div[2]/div[1]/div/div/div[3]/a/div')))
-        submit_captcha_btn.click()
-
-        # time.sleep(1000) 
+        submit_captcha_btn.click() 
 
     def click_cor(self, cor):
         # print("左上角坐标{},{}".format( self.get_position()[0], self.get_position()[2]))
@@ -222,16 +208,7 @@ class CrackGeetest():
             exit(0)
 
 
-
-    
-
-        # print(pic_id, pic_str)
-
-        
-
 if __name__ == '__main__':
     crack = CrackGeetest()
     crack.crack()
     crack.login()
-"""
-"""
