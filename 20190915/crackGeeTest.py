@@ -23,14 +23,15 @@ class CrackGeetest():
         self.pic_id = ''
         self.option = webdriver.ChromeOptions()
         self.url = 'https://account.geetest.com/login'
-        self.browser = webdriver.Chrome('D:\\Google\\Chrome\\Application\\chromedriver.exe', options = self.option)
+        self.browser = webdriver.Chrome('C:\\Users\\chilly\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe', options = self.option)
         # self.browser.maximize_window()
         self.wait = WebDriverWait(self.browser, 20)
         self.email = EMAIL
         self.password = PASSWORD
     
     def __del__(self):
-        self.browser.close()
+        # self.browser.close()
+        pass
     
     def get_geetest_button(self):
         """

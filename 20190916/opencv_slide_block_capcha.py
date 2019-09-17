@@ -35,7 +35,7 @@ class Login(object):
         # 如果是实际应用中，可在此处账号和密码
         self.url = "https://open.captcha.qq.com/online.html" 
         self.option = webdriver.ChromeOptions()
-        self.driver = webdriver.Chrome('D:\\Google\\Chrome\\Application\\chromedriver.exe', options = self.option)
+        self.driver = webdriver.Chrome('C:\\Users\\chilly\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe', options = self.option)
         
 
     @staticmethod
