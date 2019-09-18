@@ -33,9 +33,10 @@ class Login(object):
     """
     def __init__(self):
         # 如果是实际应用中，可在此处账号和密码
-        self.url = "https://open.captcha.qq.com/online.html"
+        self.url = "https://login.51job.com/login.php" 
         self.option = webdriver.ChromeOptions()
         self.driver = webdriver.Chrome('C:\\Users\\chilly\\Downloads\\chromedriver.exe', options = self.option)
+        
 
     @staticmethod
     def show(name):
@@ -91,10 +92,11 @@ class Login(object):
         x, y = np.unravel_index(result.argmax(), result.shape)
         print("匹配宽度为", y)
         print("匹配高度为", x)
+        
         # 展示圈出来的区域
-        # cv2.rectangle(target, (y, x), (y + 20, x + 20), (7, 249, 151), 2)
-        # cv2.imwrite("yuantu.jpg", target)
-        # Login.show(target)
+        cv2.rectangle(target, (y, x), (y + 20, x + 20), (7, 249, 151), 2)
+        cv2.imwrite("yuantu.jpg", target)
+        Login.show(target)
         # time.sleep(2000)
         return x, y
 
@@ -168,26 +170,32 @@ class Login(object):
         driver.maximize_window()
         driver.get(self.url)
 
-        click_keyi_username = driver.find_element_by_xpath("//div[@class='wp-onb-tit']/a[text()='可疑用户']")
-        self.webdriverwait_click(driver, click_keyi_username)
+        click_username_input = driver.find_element_by_id("loginname")
+        self.webdriverwait_send_keys(driver, click_username_input, "15872998154")
 
-        login_button = driver.find_element_by_id('code')
-        self.webdriverwait_click(driver, login_button)
-        time.sleep(1)
+        click_password_input = driver.find_element_by_id("password")
+        self.webdriverwait_send_keys(driver, click_password_input, "qwer66668888")
 
-        driver.switch_to.frame(driver.find_element_by_id('tcaptcha_iframe'))  # switch 到 滑块frame
-        time.sleep(0.5)
-        bk_block = driver.find_element_by_xpath('//img[@id="slideBg"]')  # 大图
+        click_login_btn = driver.find_element_by_id("login_btn")
+        self.webdriverwait_click(driver, click_login_btn)
+
+
+        slide_btn = driver.find_element_by_xpath('//*[@id="slide_btn"]') #选中滑动按钮
+        ActionChains(driver).move_to_element(slide_btn).perform() #鼠标指针悬浮在滑动按钮之上，这样背景图可见
+        time.sleep(2)
+        ActionChains(driver).click_and_hold(on_element=slide_btn).perform()
+
+        bk_block = driver.find_element_by_xpath('//*[@id="slide_bg_img"]')  # 大图
         web_image_width = bk_block.size
         web_image_width = web_image_width['width']
-        bk_block_x = bk_block.location['x']
+        bk_block_x = bk_block.location['x'] 
 
-        slide_block = driver.find_element_by_xpath('//img[@id="slideBlock"]')  # 小滑块
-        slide_block_x = slide_block.location['x']
+        slide_block = driver.find_element_by_xpath('//*[@id="slide_img"]/img')  # 小滑块
+        slide_block_x = slide_block.location['x'] 
 
-        bk_block = driver.find_element_by_xpath('//img[@id="slideBg"]').get_attribute('src')       # 大图 url
-        slide_block = driver.find_element_by_xpath('//img[@id="slideBlock"]').get_attribute('src')  # 小滑块 图片url
-        slid_ing = driver.find_element_by_xpath('//div[@id="tcaptcha_drag_thumb"]')  # 滑块
+        bk_block = driver.find_element_by_xpath('//*[@id="slide_bg_img"]').get_attribute('src')       # 大图 url
+        slide_block = driver.find_element_by_xpath('//*[@id="slide_img"]/img').get_attribute('src')  # 小滑块 图片url
+        # slid_ing = driver.find_element_by_xpath('//div[@id="tcaptcha_drag_thumb"]')  # 滑块
 
         os.makedirs('./image/', exist_ok=True)
         self.urllib_download(bk_block, './image/bkBlock.png')
@@ -198,11 +206,12 @@ class Login(object):
         width_scale = float(real_width) / float(web_image_width)
         position = self.get_postion('./image/bkBlock.png', './image/slideBlock.png')
         real_position = position[1] / width_scale
-        real_position = real_position - (slide_block_x - bk_block_x)
+        real_position = real_position 
+        # - (slide_block_x  - bk_block_x)
         track_list = self.get_track(real_position + 4)
 
-        ActionChains(driver).click_and_hold(on_element=slid_ing).perform()  # 点击鼠标左键，按住不放
-        time.sleep(0.2)
+        # ActionChains(driver).click_and_hold(on_element=slid_ing).perform()  # 点击鼠标左键，按住不放
+        # time.sleep(0.2)
         # print('第二步,拖动元素')
         for track in track_list:
             ActionChains(driver).move_by_offset(xoffset=track, yoffset=0).perform()  # 鼠标移动到距离当前位置（x,y）
@@ -210,10 +219,11 @@ class Login(object):
         # ActionChains(driver).move_by_offset(xoffset=-random.randint(0, 1), yoffset=0).perform()   # 微调，根据实际情况微调
         time.sleep(1)
         # print('第三步,释放鼠标')
-        ActionChains(driver).release(on_element=slid_ing).perform()
+        ActionChains(driver).release(on_element=slide_btn).perform()
         time.sleep(1)
 
         print('登录成功')
+        time.sleep(1000)
         self.after_quit()
 
 

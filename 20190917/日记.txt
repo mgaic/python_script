@@ -8,4 +8,17 @@
 
 5.进入登陆页面,由于其滑块display为none,故打开开发者工具，定位到滑块元素，设置其为块级
 	这样就好查看元素，定位元素
-	
+	显示滑动框,便于调试 
+	document.getElementById("slide_wrapper").style.display = "block";
+
+6.报错call function result missing value 
+	谷歌浏览器自动升级导致之前下载的driver无效，尽管可以驱动打开相关界面但是切换frame时报错
+	升级chromewebdriver即可解决
+
+7.前程无忧的src并不是一段url，而是base64编码的图片信息，解码得图片
+
+8.反复调试,滑块坐标计算还是有问题,接下来解决这一问题 
+
+9.利用opencv的模糊匹配并不能够准确的匹配到坐标，图片有干扰，故换边缘检测搞定匹配问题
+
+10.使用边缘检测对前程无忧滑块识别率也并不高，而对于腾讯防水墙滑块图背景可直接圈定出缺口图片
