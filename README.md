@@ -33,4 +33,5 @@
 
 ## 20190917 之前使用opencv的模糊匹配找到缺口位置，本次利用canny边缘检测找出缺口位置并尝试一波前程无忧的滑块验证码
 
-## 20190918 某视频软件自动刷视频, 基于python + adb + appium + selenium
+## 20190918 某视频软件自动刷视频,获取金币, 基于python + adb + appium + selenium
+
