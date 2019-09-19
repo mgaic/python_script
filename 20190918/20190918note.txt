@@ -1,0 +1,26 @@
+1. 电脑重装，先搞定jdk、android SDK，使用adb连接上真机：华为honor 10(未root)
+
+2. adb devices 查看设备
+   adb -s MKJ4C18802001823 shell 进入交互模式
+   adb -s MKJ4C18802001823 shell logcat | grep cmp= 捕捉应用的包名以及活动名
+   获取如下：
+   		包名：com.ss.android.ugc.aweme.lite
+    	活动名：com.ss.android.ugc.aweme.main.MainActivity
+
+3.编写脚本驱动上滑刷视频
+
+4.每次利用appium打开app都会遇到清楚本地数据的问题
+	 capbility中设置："noReset": True 即可，发现进入之后之前的登录状态还在
+
+5.Appium处理滑动方法是swipe
+ 	滑动API：Swipe（int start x,int start y,int end x,int y,duration)
+ 	duration表示几秒完成该滑动动作,单位为毫秒。
+
+6.遇到了swipe滑动无效问题,难道是某音做的太好了？
+	太蠢了。。。四个参数
+	start_x,start_y
+	end_x,end_y
+	y轴向下，越来越大
+
+7.搞定滑动自动播放视频，获取金币
+
